@@ -6,43 +6,46 @@ O **SkillSwap** é uma aplicação web de aprendizagem colaborativa. A plataform
 
 ## Status do projeto
 
-Em desenvolvimento - **Ciclo 1 concluído**.
+Em desenvolvimento - **Ciclo 2 concluído**.
 
-Nesta primeira etapa foram desenvolvidos a estrutura inicial do projeto, a página de apresentação responsiva, a identidade visual e o modelo inicial do banco de dados.
+- **Ciclo 1:** estrutura inicial do projeto, página de apresentação responsiva, identidade visual e modelo inicial do banco de dados.
+- **Ciclo 2:** conexão real com o MySQL e funcionalidades de conta: cadastro, login, perfil do usuário e logout.
 
-## Funcionalidades planejadas
+## Funcionalidades
 
-- Cadastro, login e perfil de usuário;
-- Registro de habilidades oferecidas e desejadas;
-- Busca de estudantes por habilidade ou categoria;
-- Solicitações de troca, aceite e recusa;
-- Painel para acompanhamento das conexões realizadas.
+- Página de apresentação responsiva com identidade visual;
+- Cadastro de usuário com senha protegida por hash (BCrypt);
+- Login com validação de e-mail e senha;
+- Perfil do usuário com visualização e edição de nome e biografia;
+- Painel para acompanhamento das conexões realizadas (previsto).
 
 ## Tecnologias
 
-- Java 23;
-- Spring Boot 3.5;
+- Java 21;
+- Spring Boot 3.5 (Web, Data JPA);
 - HTML5, CSS3 e JavaScript;
-- MySQL;
-- Gradle.
+- MySQL 8.0;
+- Gradle 9.
 
 ## Como executar
 
 1. Clone o repositório e abra a pasta do projeto.
-2. Configure o Java 23 no terminal:
+2. Tenha o MySQL 8.0 instalado e em execução, e crie o banco com o script `database/schema.sql`.
+3. Configure o Java 21 no terminal:
 
    ```powershell
-   $env:JAVA_HOME='C:\Program Files\Java\jdk-23'
+   $env:JAVA_HOME='C:\Program Files\Java\jdk-21'
    $env:Path="$env:JAVA_HOME\bin;$env:Path"
    ```
 
-3. Inicie a aplicação:
+4. Ajuste a senha do MySQL em `src/main/resources/application.properties` (ou defina a variável de ambiente `DB_PASSWORD`).
+5. Inicie a aplicação:
 
    ```powershell
-   gradle bootRun
+   .\gradlew bootRun
    ```
 
-4. Acesse [http://localhost:8080](http://localhost:8080) no navegador.
+6. Acesse [http://localhost:8080](http://localhost:8080) no navegador.
 
 Para encerrar o servidor, use `Ctrl + C` no terminal.
 
@@ -50,9 +53,12 @@ Para encerrar o servidor, use `Ctrl + C` no terminal.
 
 ```text
 skillswap/
-├── database/                 # Modelo inicial do banco de dados
+├── database/                 # Script de criação do banco de dados
 ├── src/main/java/            # Aplicação Java e Spring Boot
-├── src/main/resources/static/# Interface web
+│   └── br/com/skillswap/
+│       ├── usuario/          # Entidade, repositório, serviço e API de usuários
+│       └── dto/              # Objetos de transferência de dados
+├── src/main/resources/static/# Interface web (cadastro, login, perfil e início)
 └── README.md
 ```
 
