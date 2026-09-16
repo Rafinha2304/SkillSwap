@@ -60,6 +60,5 @@ skillswap/
 
 - Rafael Kraieski
 - Caio Hering
-- Guilherme Bragagnolo
 
 Projeto acadêmico desenvolvido para a disciplina de Desenvolvimento de Sistemas.
