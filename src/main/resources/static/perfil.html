@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu perfil | SkillSwap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="perfil">
+    <header class="topbar">
+        <a class="brand" href="index.html" aria-label="SkillSwap, página inicial">
+            <span class="brand-mark">S</span>
+            <span>Skill<span>Swap</span></span>
+        </a>
+        <nav aria-label="Navegação principal">
+            <a href="index.html">Início</a>
+            <a href="#" id="link-sair">Sair</a>
+        </nav>
+    </header>
+
+    <main class="auth-shell">
+        <section class="auth-card perfil-card" aria-labelledby="perfil-title">
+            <div class="perfil-head">
+                <span class="perfil-avatar" id="perfil-inicial">?</span>
+                <div>
+                    <h1 id="perfil-title">Meu perfil</h1>
+                    <p><span id="perfil-email"></span><br><small id="perfil-desde"></small></p>
+                </div>
+            </div>
+
+            <h2 class="perfil-section-title">Minha biografia</h2>
+            <p class="perfil-bio" id="perfil-bio"></p>
+
+            <h2 class="perfil-section-title">Editar perfil</h2>
+            <form id="form-perfil" novalidate>
+                <div class="field">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" maxlength="120" required>
+                </div>
+                <div class="field">
+                    <label for="biografia">Biografia</label>
+                    <textarea id="biografia" name="biografia" maxlength="500" placeholder="Conte o que você sabe ensinar e o que deseja aprender."></textarea>
+                </div>
+                <div class="auth-actions">
+                    <button class="button button-primary button-large" type="submit">Salvar alterações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="js/auth.js"></script>
+</body>
+</html>
