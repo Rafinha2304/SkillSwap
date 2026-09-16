@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkillSwap - troque conhecimentos e aprenda com outros estudantes.">
+    <title>SkillSwap | Aprender é melhor quando se compartilha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#inicio" aria-label="SkillSwap, página inicial">
+            <span class="brand-mark">S</span>
+            <span>Skill<span>Swap</span></span>
+        </a>
+        <nav aria-label="Navegação principal">
+            <a href="#como-funciona">Como funciona</a>
+            <a href="#categorias">Explorar</a>
+        </nav>
+        <div class="header-actions">
+            <button class="button button-ghost" type="button" data-demo-message="A área de login será criada no Ciclo 2.">Entrar</button>
+            <a class="button button-primary" href="#participar">Criar conta</a>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow">APRENDIZAGEM COLABORATIVA</p>
+                <h1 id="hero-title">Você sabe algo. <em>Alguém quer aprender.</em></h1>
+                <p class="hero-text">No SkillSwap, conhecimentos viram conexões. Encontre estudantes para ensinar, aprender e crescer junto.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary button-large" href="#participar">Começar agora <span aria-hidden="true">→</span></a>
+                    <a class="text-link" href="#como-funciona">Ver como funciona <span aria-hidden="true">↓</span></a>
+                </div>
+                <div class="social-proof" aria-label="Informações da comunidade">
+                    <div class="avatars" aria-hidden="true"><span>R</span><span>C</span><span>G</span><span>+</span></div>
+                    <p><strong>Uma comunidade feita por estudantes</strong><br>para trocar o que cada um sabe.</p>
+                </div>
+            </div>
+            <div class="hero-visual" aria-label="Exemplo de conexão entre habilidades">
+                <div class="orb orb-one"></div>
+                <div class="orb orb-two"></div>
+                <article class="profile-card profile-main">
+                    <div class="profile-top"><span class="avatar avatar-lu">L</span><span class="online">Disponível</span></div>
+                    <h2>Luana Martins</h2>
+                    <p>Design &amp; criatividade</p>
+                    <div class="skill-row"><span>Posso ensinar</span><b>Design no Canva</b></div>
+                    <div class="skill-row wants"><span>Quero aprender</span><b>Java básico</b></div>
+                </article>
+                <article class="profile-card profile-small profile-left">
+                    <span class="avatar avatar-jo">J</span><div><b>João</b><small>Java básico</small></div>
+                </article>
+                <article class="match-card"><span class="match-icon">✦</span><div><b>Possível troca!</b><small>Vocês têm interesses compatíveis.</small></div></article>
+            </div>
+        </section>
+
+        <section class="steps" id="como-funciona" aria-labelledby="steps-title">
+            <div class="section-heading"><p class="eyebrow">SIMPLES E COLABORATIVO</p><h2 id="steps-title">Compartilhar conhecimento começa em três passos.</h2></div>
+            <div class="steps-grid">
+                <article><span class="step-number">01</span><h3>Crie seu perfil</h3><p>Mostre suas habilidades e conte o que deseja aprender.</p></article>
+                <article><span class="step-number">02</span><h3>Encontre conexões</h3><p>Busque estudantes por área, habilidade ou interesse.</p></article>
+                <article><span class="step-number">03</span><h3>Comece a trocar</h3><p>Envie uma solicitação e combine a melhor forma de aprender.</p></article>
+            </div>
+        </section>
+
+        <section class="categories" id="categorias" aria-labelledby="categories-title">
+            <div><p class="eyebrow">EXPLORE POSSIBILIDADES</p><h2 id="categories-title">Toda habilidade pode abrir uma conversa.</h2></div>
+            <div class="category-grid">
+                <button type="button" class="category-card" data-category="Tecnologia" data-icon="⌘" data-skills="Java básico, HTML e CSS, lógica de programação"><span>⌘</span><b>Tecnologia</b><small>Programação, dados e web</small></button>
+                <button type="button" class="category-card" data-category="Criatividade" data-icon="✎" data-skills="Canva, edição de vídeo, ilustração"><span>✎</span><b>Criatividade</b><small>Design, edição e arte</small></button>
+                <button type="button" class="category-card" data-category="Idiomas" data-icon="◌" data-skills="Conversação em inglês, escrita, apresentações"><span>◌</span><b>Idiomas</b><small>Conversação e escrita</small></button>
+                <button type="button" class="category-card" data-category="Estudos" data-icon="∑" data-skills="Matemática, física, organização de estudos"><span>∑</span><b>Estudos</b><small>Revisão e reforço</small></button>
+            </div>
+        </section>
+
+        <section class="community" aria-labelledby="community-title">
+            <div class="community-card">
+                <div class="community-copy"><p class="eyebrow">UMA COMUNIDADE QUE SE COMPLETA</p><h2 id="community-title">Ensinar também é uma forma de aprender.</h2><p>O SkillSwap valoriza trocas simples: uma tarde revisando matemática, uma conversa em inglês ou uma ajuda para começar na programação.</p><a class="text-link" href="#participar">Fazer parte da comunidade <span aria-hidden="true">→</span></a></div>
+                <div class="connection-list" aria-label="Exemplos de trocas de conhecimento">
+                    <article><span class="mini-avatar a1">M</span><div><b>Marina</b><small>Oferece: inglês</small></div><span class="swap-arrow">↔</span><div class="align-right"><b>Pedro</b><small>Oferece: matemática</small></div><span class="mini-avatar a2">P</span></article>
+                    <article><span class="mini-avatar a3">A</span><div><b>Arthur</b><small>Oferece: Java</small></div><span class="swap-arrow">↔</span><div class="align-right"><b>Bianca</b><small>Oferece: design</small></div><span class="mini-avatar a4">B</span></article>
+                    <p class="connection-note"><span>●</span> Exemplos de trocas possíveis na plataforma</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" id="participar">
+            <p class="eyebrow">VAMOS COMEÇAR?</p><h2>Seu próximo aprendizado pode começar com uma troca.</h2>
+            <button class="button button-dark button-large" type="button" data-demo-message="O cadastro será implementado no Ciclo 2. Por enquanto, esta é a tela inicial do SkillSwap.">Quero participar <span aria-hidden="true">→</span></button>
+        </section>
+    </main>
+
+    <footer><a class="brand" href="#inicio"><span class="brand-mark">S</span><span>Skill<span>Swap</span></span></a><p>Projeto acadêmico desenvolvido por Rafael Kraieski, Caio Hering e Guilherme Bragagnolo.</p></footer>
+    <div class="modal-backdrop" hidden>
+        <section class="category-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal-close" type="button" aria-label="Fechar janela">×</button>
+            <span class="modal-icon"></span><p class="eyebrow">EXPLORAR CATEGORIA</p><h2 id="modal-title"></h2><p class="modal-description">Estas são algumas habilidades que poderão aparecer nesta categoria quando a busca for implementada.</p><div class="skill-chips"></div><button class="button button-primary modal-action" type="button">Quero explorar depois</button>
+        </section>
+    </div>
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+</body>
+</html>
