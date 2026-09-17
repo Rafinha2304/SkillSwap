@@ -52,22 +52,4 @@ public class UsuarioService {
         }
         return UsuarioResponse.from(usuario);
     }
-
-    public UsuarioResponse buscarPorId(Long id) {
-        Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado."));
-        return UsuarioResponse.from(usuario);
-    }
-
-    public UsuarioResponse atualizarPerfil(Long id, PerfilUpdateRequest request) {
-        Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado."));
-
-        if (request.nome() == null || request.nome().isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe o seu nome.");
-        }
-        usuario.setNome(request.nome().trim());
-        usuario.setBiografia(request.biografia());
-        return UsuarioResponse.from(repository.save(usuario));
-    }
 }
