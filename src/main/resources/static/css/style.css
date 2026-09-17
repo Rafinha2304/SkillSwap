@@ -78,3 +78,17 @@ nav { display:flex; gap:26px; color:#4b5567; font-size:14px; font-weight:600; } 
 .vazio b { color:var(--ink); }
 .vazio p { margin:8px auto 0; max-width:420px; font-size:13px; line-height:1.6; }
 @media (max-width:780px){ .resultados{grid-template-columns:1fr} .busca-card{padding:28px 22px} .form-row{grid-template-columns:1fr} }
+
+/* Solicitações de troca (Ciclo 4) */
+.troca-lista { display:grid; gap:10px; }
+.troca-item { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 14px; border:1px solid var(--line); border-radius:12px; background:#faf8f4; }
+.troca-quem { display:flex; align-items:center; gap:10px; }
+.troca-quem b { font:700 14px "Outfit",sans-serif; color:var(--ink); }
+.troca-quem:hover b { color:var(--purple); }
+.troca-acoes { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+.troca-acoes .button { padding:8px 12px; font-size:12px; }
+.status-chip { padding:5px 9px; border-radius:30px; font-size:10px; font-weight:800; letter-spacing:.4px; text-transform:uppercase; white-space:nowrap; }
+.status-pendente { color:#8a6116; background:#fdf1d8; }
+.status-aceita { color:#2f7d5c; background:#dcf3e8; }
+.status-recusada { color:#a04b4b; background:#f9e3e3; }
+@media (max-width:470px){ .troca-item{flex-direction:column; align-items:flex-start} .troca-acoes{justify-content:flex-start} }

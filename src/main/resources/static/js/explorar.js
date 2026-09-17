@@ -1,13 +1,19 @@
 // Telas de busca de estudantes e de perfil público de outro estudante.
 
-function mostrarAcaoSair() {
+function aplicarSessaoNaNavegacao() {
+    const logado = usuarioLogado();
     const acaoSair = document.querySelector('[data-sair]');
-    if (!acaoSair || !usuarioLogado()) return;
-    acaoSair.hidden = false;
-    acaoSair.addEventListener('click', (event) => {
-        event.preventDefault();
-        sair();
-    });
+    if (acaoSair && logado) {
+        acaoSair.hidden = false;
+        acaoSair.addEventListener('click', (event) => {
+            event.preventDefault();
+            sair();
+        });
+    }
+    const acaoTrocas = document.querySelector('[data-trocas]');
+    if (acaoTrocas && logado) {
+        acaoTrocas.hidden = false;
+    }
 }
 
 function chipDeHabilidade(nome) {
@@ -43,7 +49,7 @@ function preencherChips(container, rotulo, nomes, limite) {
 }
 
 function iniciarBusca() {
-    mostrarAcaoSair();
+    aplicarSessaoNaNavegacao();
 
     const form = document.querySelector('#form-busca');
     const resultados = document.querySelector('#resultados');
@@ -103,10 +109,10 @@ function iniciarBusca() {
 }
 
 function iniciarEstudante() {
-    mostrarAcaoSair();
+    aplicarSessaoNaNavegacao();
 
     const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
+    const id = Number(params.get('id'));
     if (!id) {
         window.location.href = 'busca.html';
         return;
@@ -135,8 +141,31 @@ function iniciarEstudante() {
         }
     }).catch((erro) => mostrarToast(erro.message));
 
-    document.querySelector('#botao-solicitar').addEventListener('click', () => {
-        mostrarToast('As solicitações de troca chegam no Ciclo 4!');
+    const botaoSolicitar = document.querySelector('#botao-solicitar');
+    const sessao = usuarioLogado();
+    if (sessao && sessao.id === id) {
+        botaoSolicitar.hidden = true;
+    }
+    botaoSolicitar.addEventListener('click', async () => {
+        if (!usuarioLogado()) {
+            mostrarToast('Entre na sua conta para solicitar uma troca.');
+            window.location.href = 'login.html';
+            return;
+        }
+        botaoSolicitar.disabled = true;
+        botaoSolicitar.textContent = 'Enviando...';
+        try {
+            await chamarApi('/solicitacoes', {
+                method: 'POST',
+                body: JSON.stringify({ deUsuarioId: sessao.id, paraUsuarioId: id })
+            });
+            botaoSolicitar.textContent = 'Solicitação enviada';
+            mostrarToast('Solicitação de troca enviada!');
+        } catch (erro) {
+            mostrarToast(erro.message);
+            botaoSolicitar.disabled = false;
+            botaoSolicitar.textContent = 'Solicitar troca';
+        }
     });
 }
 

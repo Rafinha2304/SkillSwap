@@ -47,6 +47,7 @@ function aplicarSessaoNaPaginaInicial() {
     acoes.innerHTML = [
         '<span class="user-chip"><span class="user-mini">' + usuario.nome.charAt(0).toUpperCase() + '</span>' + primeiroNome + '</span>',
         '<a class="button button-ghost" href="perfil.html">Meu perfil</a>',
+        '<a class="button button-ghost" href="solicitacoes.html">Trocas</a>',
         '<button class="button button-primary" type="button" data-sair>Sair</button>'
     ].join('');
     acoes.querySelector('[data-sair]').addEventListener('click', sair);
