@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontrar estudantes | SkillSwap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="busca">
+    <header class="topbar">
+        <a class="brand" href="index.html" aria-label="SkillSwap, página inicial">
+            <span class="brand-mark">S</span>
+            <span>Skill<span>Swap</span></span>
+        </a>
+        <nav aria-label="Navegação principal">
+            <a href="index.html">Início</a>
+            <a href="#" data-sair hidden>Sair</a>
+        </nav>
+    </header>
+
+    <main class="auth-shell busca-shell">
+        <section class="busca-card" aria-labelledby="busca-title">
+            <p class="eyebrow">DESCUBRA PESSOAS</p>
+            <h1 id="busca-title">Encontrar estudantes</h1>
+            <p class="auth-sub">Busque por habilidade ou categoria e veja quem pode trocar conhecimento com você.</p>
+
+            <form id="form-busca" class="busca-form" novalidate>
+                <input type="text" name="busca" maxlength="100" placeholder="Buscar habilidade, ex.: Java, inglês, Canva" aria-label="Buscar habilidade">
+                <select name="categoria" aria-label="Categoria">
+                    <option value="">Todas as categorias</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Criatividade">Criatividade</option>
+                    <option value="Idiomas">Idiomas</option>
+                    <option value="Estudos">Estudos</option>
+                    <option value="Outros">Outros</option>
+                </select>
+                <button class="button button-primary" type="submit">Buscar</button>
+            </form>
+
+            <div class="resultados" id="resultados"></div>
+            <div class="vazio" id="mensagem-vazia" hidden>
+                <b>Nenhum estudante encontrado.</b>
+                <p>Tente outra habilidade ou categoria. Você também pode registrar suas habilidades no seu perfil para aparecer nas buscas.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="js/sessao.js"></script>
+    <script src="js/explorar.js"></script>
+</body>
+</html>

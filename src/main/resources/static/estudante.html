@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | SkillSwap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="estudante">
+    <header class="topbar">
+        <a class="brand" href="index.html" aria-label="SkillSwap, página inicial">
+            <span class="brand-mark">S</span>
+            <span>Skill<span>Swap</span></span>
+        </a>
+        <nav aria-label="Navegação principal">
+            <a href="busca.html">Estudantes</a>
+            <a href="index.html">Início</a>
+            <a href="#" data-sair hidden>Sair</a>
+        </nav>
+    </header>
+
+    <main class="auth-shell">
+        <section class="auth-card perfil-card" aria-labelledby="estudante-nome">
+            <div class="perfil-head">
+                <span class="perfil-avatar" id="estudante-inicial">?</span>
+                <div>
+                    <h1 id="estudante-nome">Perfil</h1>
+                    <p><small id="estudante-desde"></small></p>
+                </div>
+            </div>
+
+            <h2 class="perfil-section-title">Biografia</h2>
+            <p class="perfil-bio" id="estudante-bio"></p>
+
+            <h2 class="perfil-section-title">Posso ensinar</h2>
+            <div class="skill-list" id="estudante-oferece"></div>
+
+            <h2 class="perfil-section-title">Quero aprender</h2>
+            <div class="skill-list" id="estudante-deseja"></div>
+
+            <div class="auth-actions acoes-duplas">
+                <button class="button button-primary button-large" type="button" id="botao-solicitar">Solicitar troca</button>
+                <a class="button button-ghost button-large" href="busca.html">Voltar à busca</a>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="js/sessao.js"></script>
+    <script src="js/explorar.js"></script>
+</body>
+</html>

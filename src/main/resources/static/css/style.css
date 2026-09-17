@@ -40,3 +40,41 @@ nav { display:flex; gap:26px; color:#4b5567; font-size:14px; font-weight:600; } 
 .perfil-section-title { font:700 13px "Outfit",sans-serif; margin:0 0 12px; text-transform:uppercase; letter-spacing:.8px; color:#4b5567; }
 .perfil-bio { background:#faf8f4; border:1px solid var(--line); border-radius:12px; padding:13px 15px; color:var(--muted); font-size:14px; line-height:1.6; margin:0 0 24px; white-space:pre-wrap; }
 @media (max-width:470px){ .auth-card{padding:28px 22px} .perfil-card{padding:28px 22px} }
+
+/* Sessão ativa no topo e habilidades (Ciclo 3) */
+.user-chip { display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:13px; color:#4b5567; }
+.user-mini { width:28px; height:28px; flex:0 0 28px; border-radius:50%; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,var(--violet),var(--purple)); font-size:12px; font-weight:800; }
+.skill-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.skill-chip { display:inline-flex; align-items:center; gap:7px; padding:8px 10px; color:#514587; border-radius:8px; background:#eeeaff; font-size:12px; font-weight:600; }
+.chip-remove { cursor:pointer; border:0; background:transparent; color:#8a7cc0; font-size:15px; line-height:1; padding:0 1px; font-weight:700; }
+.chip-remove:hover { color:var(--purple); }
+.skill-vazia { color:var(--muted); font-size:12px; margin:0; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.field select { border:1px solid var(--line); border-radius:10px; padding:12px 13px; font:inherit; font-size:14px; background:#faf8f4; width:100%; cursor:pointer; transition:border-color .2s,background .2s; }
+.field select:focus { outline:none; border-color:var(--purple); background:#fff; }
+.separador { margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+.acoes-duplas { display:flex; gap:10px; }
+.acoes-duplas .button { flex:1; }
+.busca-card { width:min(860px,100%); background:#fff; border:1px solid var(--line); border-radius:20px; padding:40px; box-shadow:var(--shadow); }
+.busca-card h1 { margin:0 0 8px; font:700 30px/1.1 "Outfit",sans-serif; letter-spacing:-1.5px; }
+.busca-form { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.busca-form input[type="text"] { flex:2 1 240px; border:1px solid var(--line); border-radius:10px; padding:12px 13px; font:inherit; font-size:14px; background:#faf8f4; }
+.busca-form input[type="text"]:focus { outline:none; border-color:var(--purple); background:#fff; }
+.busca-form select { flex:1 1 170px; border:1px solid var(--line); border-radius:10px; padding:12px 13px; font:inherit; font-size:14px; background:#faf8f4; cursor:pointer; }
+.busca-form .button { flex:0 0 auto; }
+.resultados { display:grid; grid-template-columns:repeat(2,1fr); gap:13px; margin-top:22px; }
+.estudante-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px; transition:.2s transform,.2s border; }
+.estudante-card:hover { transform:translateY(-3px); border-color:var(--purple); }
+.estudante-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.estudante-top .user-mini { width:40px; height:40px; flex-basis:40px; font-size:16px; }
+.estudante-top b { font:700 15px "Outfit",sans-serif; }
+.bio-curta { color:var(--muted); font-size:12.5px; line-height:1.5; margin:0 0 4px; }
+.card-rotulo { display:block; color:#6d5fa4; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.6px; margin-top:12px; }
+.card-rotulo.rotulo-aprender { color:#52806b; }
+.card-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.card-chips .skill-chip { padding:6px 8px; font-size:11px; }
+.estudante-card .text-link { display:inline-block; margin-top:14px; font-size:13px; }
+.vazio { text-align:center; color:var(--muted); padding:38px 24px; border:1px dashed var(--line); border-radius:14px; margin-top:22px; }
+.vazio b { color:var(--ink); }
+.vazio p { margin:8px auto 0; max-width:420px; font-size:13px; line-height:1.6; }
+@media (max-width:780px){ .resultados{grid-template-columns:1fr} .busca-card{padding:28px 22px} .form-row{grid-template-columns:1fr} }
