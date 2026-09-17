@@ -6,11 +6,12 @@ O **SkillSwap** é uma aplicação web de aprendizagem colaborativa. A plataform
 
 ## Status do projeto
 
-Em desenvolvimento - **Ciclo 3 concluído**.
+Em desenvolvimento - **Ciclo 4 concluído**.
 
 - **Ciclo 1:** estrutura inicial do projeto, página de apresentação responsiva, identidade visual e modelo inicial do banco de dados.
 - **Ciclo 2:** conexão real com o MySQL e funcionalidades de conta: cadastro, login, perfil do usuário e logout.
 - **Ciclo 3:** registro de habilidades (posso ensinar / quero aprender), busca de estudantes por habilidade ou categoria, perfil público de outros estudantes e sessão ativa no topo do site.
+- **Ciclo 4:** solicitações de troca de conhecimento: envio a partir do perfil de outro estudante, aceite e recusa pelo destinatário e acompanhamento do estado de cada solicitação.
 
 ## Funcionalidades
 
@@ -21,7 +22,8 @@ Em desenvolvimento - **Ciclo 3 concluído**.
 - Busca de estudantes por habilidade ou categoria;
 - Perfil público de outros estudantes;
 - Sessão ativa no topo do site (nome do usuário logado, atalho para o perfil e sair);
-- Solicitações de troca entre estudantes (previsto para o Ciclo 4).
+- Solicitações de troca: envio, aceite, recusa e acompanhamento do estado;
+- Painel para acompanhamento das conexões realizadas (previsto).
 
 ## Tecnologias
 
