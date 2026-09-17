@@ -1,51 +1,4 @@
-const API_URL = '/api';
-const STORAGE_KEY = 'skillswap_usuario';
-
-function usuarioLogado() {
-    try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY));
-    } catch {
-        return null;
-    }
-}
-
-function salvarSessao(usuario) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(usuario));
-}
-
-function sair() {
-    localStorage.removeItem(STORAGE_KEY);
-    window.location.href = 'login.html';
-}
-
-function mostrarToast(mensagem) {
-    const toast = document.querySelector('.toast');
-    toast.textContent = mensagem;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3500);
-}
-
-async function chamarApi(caminho, opcoes = {}) {
-    const resposta = await fetch(API_URL + caminho, {
-        headers: { 'Content-Type': 'application/json' },
-        ...opcoes
-    });
-    const dados = await resposta.json().catch(() => ({}));
-    if (!resposta.ok) {
-        throw new Error(dados.message || 'Não foi possível concluir a operação. Tente novamente.');
-    }
-    return dados;
-}
-
-function iniciarBotao(botao, textoOcupado) {
-    botao.disabled = true;
-    const textoOriginal = botao.textContent;
-    botao.textContent = textoOcupado;
-    return () => {
-        botao.disabled = false;
-        botao.textContent = textoOriginal;
-    };
-}
+// Telas de login, cadastro e perfil (com habilidades).
 
 function iniciarLogin() {
     const form = document.querySelector('#form-login');
@@ -103,47 +56,131 @@ function iniciarCadastro() {
     });
 }
 
-function preencherPerfil(usuario) {
-    document.querySelector('#perfil-inicial').textContent = usuario.nome.charAt(0).toUpperCase();
-    document.querySelector('#perfil-email').textContent = usuario.email;
+function preencherCabecalhoDoPerfil(perfil) {
+    document.querySelector('#perfil-inicial').textContent = perfil.nome.charAt(0).toUpperCase();
+    document.querySelector('#perfil-email').textContent = perfil.email;
     document.querySelector('#perfil-desde').textContent = 'Membro desde ' +
-        new Date(usuario.criadoEm).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-    document.querySelector('#perfil-bio').textContent = usuario.biografia ||
+        new Date(perfil.criadoEm).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.querySelector('#perfil-bio').textContent = perfil.biografia ||
         'Escreva uma biografia para contar o que você pode ensinar e o que deseja aprender.';
-    document.querySelector('#nome').value = usuario.nome;
-    document.querySelector('#biografia').value = usuario.biografia || '';
 }
 
-function iniciarPerfil() {
+function preencherListaDeHabilidades(perfil, seletor, itens) {
+    const lista = document.querySelector(seletor);
+    lista.innerHTML = '';
+    if (!itens.length) {
+        const aviso = document.createElement('p');
+        aviso.className = 'skill-vazia';
+        aviso.textContent = 'Nenhuma habilidade registrada ainda.';
+        lista.appendChild(aviso);
+        return;
+    }
+    itens.forEach((item) => {
+        const chip = document.createElement('span');
+        chip.className = 'skill-chip';
+        chip.append(item.nome);
+        const remover = document.createElement('button');
+        remover.type = 'button';
+        remover.className = 'chip-remove';
+        remover.setAttribute('aria-label', 'Remover ' + item.nome);
+        remover.dataset.vinculo = item.vinculoId;
+        remover.textContent = '×';
+        remover.addEventListener('click', async () => {
+            try {
+                await chamarApi('/usuarios/' + perfil.id + '/habilidades/' + item.vinculoId, { method: 'DELETE' });
+                await recarregarPerfil(perfil.id);
+                mostrarToast('Habilidade removida do perfil.');
+            } catch (erro) {
+                mostrarToast(erro.message);
+            }
+        });
+        chip.appendChild(remover);
+        lista.appendChild(chip);
+    });
+}
+
+async function recarregarPerfil(id) {
+    const perfil = await chamarApi('/usuarios/' + id);
+    preencherCabecalhoDoPerfil(perfil);
+    preencherListaDeHabilidades(perfil, '#lista-oferece', perfil.oferece);
+    preencherListaDeHabilidades(perfil, '#lista-deseja', perfil.desejaAprender);
+    document.querySelector('#nome').value = perfil.nome;
+    document.querySelector('#biografia').value = perfil.biografia || '';
+    const sessao = usuarioLogado();
+    if (sessao) {
+        salvarSessao({ ...sessao, nome: perfil.nome, email: perfil.email, biografia: perfil.biografia });
+    }
+    return perfil;
+}
+
+async function iniciarPerfil() {
     const usuario = usuarioLogado();
     if (!usuario) {
         window.location.href = 'login.html';
         return;
     }
-    preencherPerfil(usuario);
 
     document.querySelector('#link-sair').addEventListener('click', (event) => {
         event.preventDefault();
         sair();
     });
 
-    const form = document.querySelector('#form-perfil');
-    form.addEventListener('submit', async (event) => {
+    let perfil;
+    try {
+        perfil = await recarregarPerfil(usuario.id);
+    } catch {
+        sair();
+        return;
+    }
+
+    const catalogo = await chamarApi('/habilidades');
+    const datalist = document.querySelector('#habilidades-existentes');
+    catalogo.forEach((habilidade) => {
+        const opcao = document.createElement('option');
+        opcao.value = habilidade.nome;
+        opcao.label = habilidade.categoria;
+        datalist.appendChild(opcao);
+    });
+
+    const formHabilidade = document.querySelector('#form-habilidade');
+    formHabilidade.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const nome = form.nome.value.trim();
-        const biografia = form.biografia.value.trim();
+        const nome = formHabilidade.nome.value.trim();
+        const categoria = formHabilidade.categoria.value;
+        const tipo = formHabilidade.tipo.value;
+        if (!nome || !categoria || !tipo) {
+            mostrarToast('Preencha a habilidade, a categoria e o tipo.');
+            return;
+        }
+        try {
+            await chamarApi('/usuarios/' + perfil.id + '/habilidades', {
+                method: 'POST',
+                body: JSON.stringify({ nome, categoria, tipo })
+            });
+            formHabilidade.reset();
+            await recarregarPerfil(perfil.id);
+            mostrarToast('Habilidade adicionada ao perfil!');
+        } catch (erro) {
+            mostrarToast(erro.message);
+        }
+    });
+
+    const formPerfil = document.querySelector('#form-perfil');
+    formPerfil.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const nome = formPerfil.nome.value.trim();
+        const biografia = formPerfil.biografia.value.trim();
         if (!nome) {
             mostrarToast('Informe o seu nome.');
             return;
         }
-        const liberar = iniciarBotao(form.querySelector('button'), 'Salvando...');
+        const liberar = iniciarBotao(formPerfil.querySelector('button'), 'Salvando...');
         try {
-            const atualizado = await chamarApi('/usuarios/' + usuario.id, {
+            await chamarApi('/usuarios/' + perfil.id, {
                 method: 'PUT',
                 body: JSON.stringify({ nome, biografia })
             });
-            salvarSessao(atualizado);
-            preencherPerfil(atualizado);
+            await recarregarPerfil(perfil.id);
             mostrarToast('Perfil atualizado com sucesso!');
         } catch (erro) {
             mostrarToast(erro.message);

@@ -16,6 +16,7 @@
             <span>Skill<span>Swap</span></span>
         </a>
         <nav aria-label="Navegação principal">
+            <a href="busca.html">Estudantes</a>
             <a href="index.html">Início</a>
             <a href="#" id="link-sair">Sair</a>
         </nav>
@@ -34,7 +35,46 @@
             <h2 class="perfil-section-title">Minha biografia</h2>
             <p class="perfil-bio" id="perfil-bio"></p>
 
-            <h2 class="perfil-section-title">Editar perfil</h2>
+            <h2 class="perfil-section-title">Posso ensinar</h2>
+            <div class="skill-list" id="lista-oferece"></div>
+
+            <h2 class="perfil-section-title">Quero aprender</h2>
+            <div class="skill-list" id="lista-deseja"></div>
+
+            <h2 class="perfil-section-title">Adicionar habilidade</h2>
+            <form id="form-habilidade" novalidate>
+                <datalist id="habilidades-existentes"></datalist>
+                <div class="field">
+                    <label for="habilidade">Habilidade</label>
+                    <input type="text" id="habilidade" name="nome" list="habilidades-existentes" maxlength="100" placeholder="Ex.: Java básico, Canva, conversação em inglês" required>
+                </div>
+                <div class="form-row">
+                    <div class="field">
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Escolha...</option>
+                            <option value="Tecnologia">Tecnologia</option>
+                            <option value="Criatividade">Criatividade</option>
+                            <option value="Idiomas">Idiomas</option>
+                            <option value="Estudos">Estudos</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="">Escolha...</option>
+                            <option value="OFERECE">Posso ensinar</option>
+                            <option value="DESEJA_APRENDER">Quero aprender</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="auth-actions">
+                    <button class="button button-dark" type="submit">Adicionar habilidade</button>
+                </div>
+            </form>
+
+            <h2 class="perfil-section-title separador">Editar perfil</h2>
             <form id="form-perfil" novalidate>
                 <div class="field">
                     <label for="nome">Nome</label>
@@ -45,13 +85,14 @@
                     <textarea id="biografia" name="biografia" maxlength="500" placeholder="Conte o que você sabe ensinar e o que deseja aprender."></textarea>
                 </div>
                 <div class="auth-actions">
-                    <button class="button button-primary button-large" type="submit">Salvar alterações</button>
+                    <button class="button button-primary" type="submit">Salvar alterações</button>
                 </div>
             </form>
         </section>
     </main>
 
     <div class="toast" role="status" aria-live="polite"></div>
+    <script src="js/sessao.js"></script>
     <script src="js/auth.js"></script>
 </body>
 </html>
