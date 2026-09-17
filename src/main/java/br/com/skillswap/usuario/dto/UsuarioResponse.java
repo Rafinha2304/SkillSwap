@@ -8,7 +8,8 @@ public record UsuarioResponse(
         String nome,
         String email,
         String biografia,
-        LocalDateTime criadoEm) {
+        LocalDateTime criadoEm,
+        String token) {
 
     public static UsuarioResponse from(Usuario usuario) {
         return new UsuarioResponse(
@@ -16,6 +17,7 @@ public record UsuarioResponse(
                 usuario.getNome(),
                 usuario.getEmail(),
                 usuario.getBiografia(),
-                usuario.getCriadoEm());
+                usuario.getCriadoEm(),
+                usuario.getToken());
     }
 }

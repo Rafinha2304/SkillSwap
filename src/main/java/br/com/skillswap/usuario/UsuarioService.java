@@ -2,9 +2,9 @@ package br.com.skillswap.usuario;
 
 import br.com.skillswap.usuario.dto.CadastroRequest;
 import br.com.skillswap.usuario.dto.LoginRequest;
-import br.com.skillswap.usuario.dto.PerfilUpdateRequest;
 import br.com.skillswap.usuario.dto.UsuarioResponse;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class UsuarioService {
         usuario.setSenhaHash(passwordEncoder.encode(request.senha()));
         usuario.setBiografia(request.biografia());
         usuario.setCriadoEm(LocalDateTime.now());
-        return UsuarioResponse.from(repository.save(usuario));
+        return UsuarioResponse.from(renovarToken(usuario));
     }
 
     public UsuarioResponse login(LoginRequest request) {
@@ -50,6 +50,19 @@ public class UsuarioService {
         if (!passwordEncoder.matches(request.senha(), usuario.getSenhaHash())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "E-mail ou senha incorretos.");
         }
-        return UsuarioResponse.from(usuario);
+        return UsuarioResponse.from(renovarToken(usuario));
+    }
+
+    public Usuario renovarToken(Usuario usuario) {
+        usuario.setToken(UUID.randomUUID().toString().replace("-", ""));
+        return repository.save(usuario);
+    }
+
+    public Usuario validarToken(String token) {
+        if (token == null || token.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Faça login para realizar esta ação.");
+        }
+        return repository.findByToken(token)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sessão expirada. Faça login novamente."));
     }
 }

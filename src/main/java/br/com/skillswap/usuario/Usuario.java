@@ -28,6 +28,9 @@ public class Usuario {
     @Column(length = 500)
     private String biografia;
 
+    @Column(length = 64)
+    private String token;
+
     @Column(name = "criado_em", nullable = false)
     private LocalDateTime criadoEm;
 
@@ -69,6 +72,14 @@ public class Usuario {
 
     public void setCriadoEm(LocalDateTime criadoEm) {
         this.criadoEm = criadoEm;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public LocalDateTime getCriadoEm() {

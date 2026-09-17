@@ -157,7 +157,7 @@ function iniciarEstudante() {
         try {
             await chamarApi('/solicitacoes', {
                 method: 'POST',
-                body: JSON.stringify({ deUsuarioId: sessao.id, paraUsuarioId: id })
+                body: JSON.stringify({ paraUsuarioId: id })
             });
             botaoSolicitar.textContent = 'Solicitação enviada';
             mostrarToast('Solicitação de troca enviada!');

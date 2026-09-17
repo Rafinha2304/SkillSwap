@@ -42,6 +42,17 @@ async function carregarTrocas(usuarioId) {
     recebidas.innerHTML = '';
     enviadas.innerHTML = '';
 
+    const todas = [...dados.recebidas, ...dados.enviadas];
+    const contagem = { PENDENTE: 0, ACEITA: 0, RECUSADA: 0 };
+    todas.forEach((solicitacao) => contagem[solicitacao.status] += 1);
+    document.querySelector('#painel-resumo').innerHTML = [
+        ['Pendentes', contagem.PENDENTE],
+        ['Aceitas', contagem.ACEITA],
+        ['Recusadas', contagem.RECUSADA]
+    ].map(([rotulo, valor]) =>
+        '<div class="resumo-card"><b>' + valor + '</b><small>' + rotulo + '</small></div>'
+    ).join('');
+
     if (!dados.recebidas.length) {
         recebidas.innerHTML = '<p class="skill-vazia">Você ainda não recebeu solicitações de troca.</p>';
     } else {
@@ -49,11 +60,11 @@ async function carregarTrocas(usuarioId) {
             const acoes = [];
             if (solicitacao.status === 'PENDENTE') {
                 acoes.push(botaoAcao('Aceitar', 'button-primary', async (event) => {
-                    await responder(solicitacao.id, usuarioId, 'ACEITA', event.target);
+                    await responder(solicitacao.id, 'ACEITA', event.target);
                     await carregarTrocas(usuarioId);
                 }));
                 acoes.push(botaoAcao('Recusar', 'button-ghost', async (event) => {
-                    await responder(solicitacao.id, usuarioId, 'RECUSADA', event.target);
+                    await responder(solicitacao.id, 'RECUSADA', event.target);
                     await carregarTrocas(usuarioId);
                 }));
             }
@@ -68,12 +79,12 @@ async function carregarTrocas(usuarioId) {
     }
 }
 
-async function responder(solicitacaoId, usuarioId, status, botao) {
+async function responder(solicitacaoId, status, botao) {
     botao.disabled = true;
     try {
         await chamarApi('/solicitacoes/' + solicitacaoId, {
             method: 'PUT',
-            body: JSON.stringify({ usuarioId, status })
+            body: JSON.stringify({ status })
         });
         mostrarToast(status === 'ACEITA' ? 'Solicitação aceita! Combine a troca.' : 'Solicitação recusada.');
     } catch (erro) {

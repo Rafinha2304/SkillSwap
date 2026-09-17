@@ -25,9 +25,14 @@ function mostrarToast(mensagem) {
 }
 
 async function chamarApi(caminho, opcoes = {}) {
+    const usuario = usuarioLogado();
+    const cabecalhos = { 'Content-Type': 'application/json', ...(opcoes.headers || {}) };
+    if (usuario && usuario.token) {
+        cabecalhos['X-Auth-Token'] = usuario.token;
+    }
     const resposta = await fetch('/api' + caminho, {
-        headers: { 'Content-Type': 'application/json' },
-        ...opcoes
+        ...opcoes,
+        headers: cabecalhos
     });
     const dados = await resposta.json().catch(() => ({}));
     if (!resposta.ok) {

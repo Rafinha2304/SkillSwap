@@ -23,20 +23,19 @@ public class SolicitacaoService {
     }
 
     @Transactional
-    public SolicitacaoItem enviar(Long deUsuarioId, Long paraUsuarioId) {
-        if (deUsuarioId == null || paraUsuarioId == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe quem envia e quem recebe a solicitação.");
+    public SolicitacaoItem enviar(Usuario deUsuario, Long paraUsuarioId) {
+        if (paraUsuarioId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe quem receberá a solicitação.");
         }
-        if (deUsuarioId.equals(paraUsuarioId)) {
+        if (deUsuario.getId().equals(paraUsuarioId)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Você não pode solicitar uma troca consigo mesmo.");
         }
-        Usuario deUsuario = buscarUsuario(deUsuarioId);
         Usuario paraUsuario = buscarUsuario(paraUsuarioId);
 
         boolean pendenteDireta = repository.existsByDeUsuarioIdAndParaUsuarioIdAndStatus(
-                deUsuarioId, paraUsuarioId, StatusSolicitacao.PENDENTE);
+                deUsuario.getId(), paraUsuarioId, StatusSolicitacao.PENDENTE);
         boolean pendenteContraria = repository.existsByDeUsuarioIdAndParaUsuarioIdAndStatus(
-                paraUsuarioId, deUsuarioId, StatusSolicitacao.PENDENTE);
+                paraUsuarioId, deUsuario.getId(), StatusSolicitacao.PENDENTE);
         if (pendenteDireta || pendenteContraria) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Já existe uma solicitação de troca pendente entre vocês.");
         }
@@ -52,11 +51,11 @@ public class SolicitacaoService {
     }
 
     @Transactional
-    public SolicitacaoItem responder(Long solicitacaoId, Long usuarioId, String novoStatus) {
+    public SolicitacaoItem responder(Long solicitacaoId, Usuario respondente, String novoStatus) {
         Solicitacao solicitacao = repository.findById(solicitacaoId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Solicitação não encontrada."));
 
-        if (!solicitacao.getParaUsuario().getId().equals(usuarioId)) {
+        if (!solicitacao.getParaUsuario().getId().equals(respondente.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Apenas quem recebeu a solicitação pode respondê-la.");
         }
         if (solicitacao.getStatus() != StatusSolicitacao.PENDENTE) {
