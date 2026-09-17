@@ -92,3 +92,10 @@ nav { display:flex; gap:26px; color:#4b5567; font-size:14px; font-weight:600; } 
 .status-aceita { color:#2f7d5c; background:#dcf3e8; }
 .status-recusada { color:#a04b4b; background:#f9e3e3; }
 @media (max-width:470px){ .troca-item{flex-direction:column; align-items:flex-start} .troca-acoes{justify-content:flex-start} }
+
+/* Painel de conexões e refinamentos (Ciclo 5) */
+.painel-resumo { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0 0 22px; }
+.resumo-card { text-align:center; padding:14px 10px; border:1px solid var(--line); border-radius:12px; background:#faf8f4; }
+.resumo-card b { display:block; font:700 24px "Outfit",sans-serif; color:var(--purple); }
+.resumo-card small { color:var(--muted); font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.5px; }
+@media (max-width:470px){ .painel-resumo{grid-template-columns:1fr 1fr 1fr; gap:6px} .resumo-card b{font-size:19px} }
