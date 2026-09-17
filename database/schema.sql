@@ -25,3 +25,13 @@ CREATE TABLE usuario_habilidades (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (habilidade_id) REFERENCES habilidades(id)
 );
+
+CREATE TABLE solicitacoes (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    de_usuario_id BIGINT NOT NULL,
+    para_usuario_id BIGINT NOT NULL,
+    status ENUM('PENDENTE', 'ACEITA', 'RECUSADA') NOT NULL,
+    criada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (de_usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (para_usuario_id) REFERENCES usuarios(id)
+);
