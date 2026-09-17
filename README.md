@@ -6,18 +6,22 @@ O **SkillSwap** é uma aplicação web de aprendizagem colaborativa. A plataform
 
 ## Status do projeto
 
-Em desenvolvimento - **Ciclo 2 concluído**.
+Em desenvolvimento - **Ciclo 3 concluído**.
 
 - **Ciclo 1:** estrutura inicial do projeto, página de apresentação responsiva, identidade visual e modelo inicial do banco de dados.
 - **Ciclo 2:** conexão real com o MySQL e funcionalidades de conta: cadastro, login, perfil do usuário e logout.
+- **Ciclo 3:** registro de habilidades (posso ensinar / quero aprender), busca de estudantes por habilidade ou categoria, perfil público de outros estudantes e sessão ativa no topo do site.
 
 ## Funcionalidades
 
 - Página de apresentação responsiva com identidade visual;
 - Cadastro de usuário com senha protegida por hash (BCrypt);
 - Login com validação de e-mail e senha;
-- Perfil do usuário com visualização e edição de nome e biografia;
-- Painel para acompanhamento das conexões realizadas (previsto).
+- Perfil do usuário com edição de nome, biografia e habilidades;
+- Busca de estudantes por habilidade ou categoria;
+- Perfil público de outros estudantes;
+- Sessão ativa no topo do site (nome do usuário logado, atalho para o perfil e sair);
+- Solicitações de troca entre estudantes (previsto para o Ciclo 4).
 
 ## Tecnologias
 
@@ -57,10 +61,13 @@ skillswap/
 ├── src/main/java/            # Aplicação Java e Spring Boot
 │   └── br/com/skillswap/
 │       ├── usuario/          # Entidade, repositório, serviço e API de usuários
+│       ├── habilidade/       # Habilidades, vínculos com usuários, perfil e busca
 │       └── dto/              # Objetos de transferência de dados
-├── src/main/resources/static/# Interface web (cadastro, login, perfil e início)
+├── src/main/resources/static/# Interface web (início, cadastro, login, perfil, busca)
 └── README.md
 ```
+
+O roteiro planejado para os próximos ciclos está em `docs/ROTEIRO_CICLOS.md`.
 
 ## Equipe
 
